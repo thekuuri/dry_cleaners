@@ -1,0 +1,308 @@
+<div class="form-style-10">
+<h1>Clipping Activity</h1>
+<form id="farmerInfo" method="POST">
+
+<div class="section"></div>
+<div class="inner-wrap">
+<input type="hidden" name="CAPTURER"  id="CAPTURER" placeholder="Enter your Name" />
+
+	     <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to reload" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+	  
+    <label>What is the site activity
+		   <input type="text" name="WHAT_IS_THE_SITE_ACTIVITY" value="Clipping" readonly>
+		   </label> 
+ <label>
+ <fieldset><legend><h3>No of beds on site</h3></legend>
+	<label>Number of - Raised<input type="number" min=0 name="BEDS_NUMBER_OF_RAISED" /></label>  
+ 	<label>Number of - Sown<input type="number" min=0 name="BEDS_NUMBER_OF_TARGET" /></label>  
+	<label>Number of - Reset<input type="number" min=0 name="" /></label>  
+  </fieldset>
+  </label>
+     <!--------- area measure html--------->
+	<div class="button-section">
+	<br>
+	 <input type="button" id="startTimer" class="gpsButton"  value="Start land measure" onclick="startPointFetching();" />
+	 <br>
+     <input type="button" value="Stop measure" id="stopTimer"  onclick="stopPointFetch();">
+     <input type="hidden" value="Calculate Area"  onclick="getArea();">
+	 <br>
+     <input type="button" value="Reset"  onclick="resetArea();">
+    </div>
+	<label> <h3>Your area is ~: <b><span id="areaHolder"></span></b></h3></label>
+	 <input type="hidden" name="LAND_GPS_POLYGON" id="LAND_GPS_POLYGON" /></label>
+	</label>
+  <!--------- end of area measure  ------------>
+		
+  
+  <label>Average Size of beds in sq mts<input type="number" min=0 name="AVERAGE_SIZE_OF_BEDS_IN_SQ_MTS" /></label> 
+   <label>Standard Criteria for site met?
+     <select name="STANDARD_CRITERIA_FOR_SITE_MET"> 
+		   <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+    </label> 
+ 
+   <label>Source of water for site<br>
+ 	  	 <input name="SOURCE_OF_WATER_FOR_SITE_DAM" type="checkbox" value="1" />Dam</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_RIVER" type="checkbox" value="1" />River</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_BOREHOLE" type="checkbox" value="1" />Borehole</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_WELL" type="checkbox" value="1" />Site Well</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_HARVESTED_RAIN_WATER" type="checkbox" value="1" />Rain Water</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_PIPED_WATER" type="checkbox" value="1" />Piped Water
+    </label> 
+
+	<label>Distance of site from water source in metres<input type="number" min=0 name="DISTANCE_OF_SITE_FROM_WATER_SOURCE" /></label>  
+	<label>
+	 <fieldset><legend>Seed Variety No.</legend>
+		      <table border=0 class="seedType">  
+	  <tr>
+	     <td><input name="SEED_VARIETY_NO_RGH04" type="checkbox" value="1" />RGH04</td>
+		 <td><input name="SEED_VARIETY_NO_PVH50" type="checkbox" value="1" />PVH50</td>
+		 <td><input name="SEED_VARIETY_NO_PVH09" type="checkbox" value="1" />PVH09</td>
+		 <td><input name="SEED_VARIETY_NO_PV19" type="checkbox" value="1" />PV19</td>
+	  </tr>
+	  <tr>
+		 <td><input name="SEED_VARIETY_NO_K326PVY" type="checkbox" value="1" />K326PVY</td>
+		 <td><input name="SEED_VARIETY_NO_CSC402" type="checkbox" value="1" />CSC402</td>
+		 <td><input name="SEED_VARIETY_NO_CSC404" type="checkbox" value="1" />CSC404</td>
+		 <td><input name="SEED_VARIETY_NO_CSC463" type="checkbox" value="1" />CSC463</td>
+	</tr><tr>
+		 <td><input name="SEED_VARIETY_NO_CSC444" type="checkbox" value="1" />CSC444</td>
+		 <td><input name="SEED_VARIETY_NO_K326" type="checkbox" value="1" />K326</td>
+		 <td><input name="SEED_VARIETY_NO_SNRA" type="checkbox" value="1" />SNRA</td>
+		 <td><input name="SEED_VARIETY_NO_CSC497" type="checkbox" value="1" />CSC497</td>
+	</tr><tr>
+		 <td><input name="SEED_VARIETY_NO_LK101" type="checkbox" value="1" />LK101</td>
+		 <td><input name="SEED_VARIETY_NO_HW" type="checkbox" value="1" />HW</td>
+		 <td><input name="SEED_VARIETY_NO_SG28" type="checkbox" value="1" />SG28</td>
+		 <td><input name="SEED_VARIETY_NO_LK26R" type="checkbox" value="1" />LK26R</td>
+	</tr>
+		 </table>
+	 </label> 
+</fieldset>
+	
+   <label>Chemical Application<br>
+ 	  	 <input name="CHEMICAL_APPLICATION_FIRST" type="checkbox" value="1" />First</br>
+		 <input name="CHEMICAL_APPLICATION_SECOND" type="checkbox" value="1" />Second</br>
+		 <input name="CHEMICAL_APPLICATION_THIRD" type="checkbox" value="1" />Third</br>
+ </label> 
+	     <label>Chemical Type
+		   <select name="CHEMICAL_TYPE"> 
+		   <option value="Dithane">Dithane</option>
+		   <option value="Orthene">Orthene</option>
+		   <option value="Actara">Actara</option>
+		   <option value="Confidor">Confidor</option>
+		   <option value="Copper">Copper</option>
+		   </select>
+		   </label> 
+<label>	Date of application of Imidachloprid<input type="date" name="DATE_OF_APPLICATION_OF_IMIDACHLOPRID" /></label>  
+<label>First Sowing Date<input type="date" name="FIRST_SOWING_DATE" /></label>  
+  
+   <label>Clippings done?
+     <select name="BEDS_DONE_CLIPPLING_CLIPPED"> 
+		   <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+    </label>
+   <label>Number of clipping   <input type="number" min=0 name="NUMBER_OF_CLIPPINGS" />   </label>
+   <label>First Clipping Date   <input type="date" name="FIRST_CLIPPING_DATE" />   </label>
+
+ <label>Are the seedlings of good quality ?<br>
+   <select name="ARE_THE_SEEDLINGS_OF_GOOD_QUALITY"> 
+		 <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+ </label>
+ 
+  <label>Did all the farmers receive BAT issued inputs<br>
+   <select name="DID_ALL_THE_FARMERS_RECEIVE_BAT_ISSUED_INPUTS"> 
+		 <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+ </label>
+
+ <label>Reason for non receipt of BAT issued inputs<input type="text" name="REASON_FOR_NON_RECEIPT_OF_BAT_ISSUED_INPUTS" /></label>  
+
+ 
+   <label>Score the Seedbed activity<br>
+   <select name="SCORE_SEEDBED_ACTIVITY"> 
+		   <option value="YES">Poor</option>
+		   <option value="Fair">Fair</option>
+		   <option value="Good">Good</option>
+		   <option value="NO">Excellent</option>
+	  </select>
+ </label>
+
+<!------------------------------------- -->		
+<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+	
+<script>
+$("#stopTimer").hide();
+//-------------------Land Measure and actions script-------------------------------
+//---------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------
+
+var pointFetcher;
+
+
+function startPointFetching()
+{
+$("#startTimer").hide();
+$("#stopTimer").show();
+//Fetch Point every 3 seconds.
+pointFetcher = setInterval(fetchPoint_calculateArea, 3000);
+//alert("Timer Set");
+return 0;
+}
+
+function resetCount()
+{
+if (confirm("Are you sure you want to clear the distance coordinates ?")==true)
+	{
+stopPointFetch();
+resetArea();
+}
+return 0;
+}
+
+function fetchPoint_calculateArea()
+{
+fetchPoint();
+getArea();
+
+return 0;
+}
+
+function stopPointFetch()
+{
+
+$("#startTimer").show();
+$("#stopTimer").hide();
+
+clearInterval(pointFetcher);
+//alert("Timer Stopped -1");
+//alert("Land Polygon:" + allCoords);
+$("#LAND_GPS_POLYGON").val(allCoords);
+$("#FARMER_CONTRACTED_VOLUME").val((landArea/10000).toFixed(2));
+
+
+getArea();
+
+return 0;
+}
+//-------------------Land Measure and actions script-----
+//-------------------------------------------------------
+//-------------------------------------------------------
+//-------------------------------------------------------
+
+</script>
+
+
+	
+	
+	
+	
+	
+	
+	
+   <script>
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "nursery_sitev1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>
+
+<script src="assets/js/Settings.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="sqlLite.js"></script>
+<script src="js/Coordinates.Area.Measure.js"></script>

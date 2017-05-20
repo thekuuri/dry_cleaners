@@ -1,0 +1,274 @@
+<div class="form-style-10">
+<h1>Topping Foliar Application</h1>
+
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+
+<div class="section"></div>
+<div class="inner-wrap">
+<input type="hidden" name="CAPTURER" id="CAPTURER" placeholder="Enter your Name" readonly/>
+
+	    <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to reload" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+      <label>Barcode <input type="text" name="BARCODE" id="barcode" name="barcode" placeholder="Click to reload" readonly /></label>			
+ <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+<input  type="hidden"   name="GROWER_NO">
+		     
+         <label>What fertilizer was applied<select name="APPLIED_FERTILIZER">
+	     <option value="foliar_feed">Foliar feed</option>
+		 <option value="None">None</option>
+		 </select>
+	    </label>
+		<label>Please enter foliar feed fertilizer type<select name="FOLIAR_FEED_FERTILIZER_TYPE">
+	     <option value="Amino_potash">Amino potash</option>
+		 <option value="Some_other_stuff">Some other stuff</option>
+		 </select>
+	    </label>
+
+	  <label>Litters applied<input  type="number"  min=0 name="LITRES_APPLIED"></label>
+	  <label>Date of Application<input  type="date"  name="FERTILIZER_APPLICATION"></label>
+
+	  <label>Did the farmer apply desuckeride? <br>
+	  	 <input type="radio" name="APPLY_DESUCKERIDE" value="YES" onclick="showClass('desuckerideApplied')">Yes</option>
+	     <input type="radio" name="APPLY_DESUCKERIDE" value="NO" onclick="hideClass('desuckerideApplied')">NO</option>
+	 	 
+	   </label>
+	<label class="desuckerideApplied">Quantity of Desuckeride applied (Litres)<input  type="number"  name="QUANTITY_OF_DESUCKERIDE"></label>
+	<label class="desuckerideApplied">Desuckeride appliccation date<input  type="date"  name="DESUCKERIDE_APPLICATION"></label>
+		 
+	     <label>What was the timing of topping
+		 <select name="TIMING_OF_TOPPING">
+	     <option value="Early">Early</option>
+		 <option value="Late">Late</option>
+		 <option value="On_time">On time</option>
+	 </select> </label>
+
+	 	<label>Topping Height<input  type="number"  name="TOPPING_HEIGHT"></label>
+		 
+	      <label>Did the farmer receive all other necessary inputs
+		 <select name="RECEIVE_OTHER_NECESSARY_INPUTS">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  
+	  <label>When are the outstanding inputs expected to be deliverd<input  type="date"  name="OUTSTANDING_EXPECTED_DELIVERY"></label>
+	  
+	     <label>Did the farmer top at recommended height
+		 <select name="TOP_AT_RECOMMENDED_HEIGHT">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  	  	  </select> </label>
+			  
+	      <label>Did the farmer recive PPE
+		 <select name="FARMER_RECEIVE_PPE">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  
+	      <label>Does he use PPE
+		 <select name="THIS_FARMER_USE_PPE">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+		  
+	  <label>What is the survival rate since transplanting (%)<input type="number" min=0 max=100 name="SURVIVAL_RATE_OF_PLANTS" /></label>
+	  
+
+	  <label>
+  <fieldset id="CashLegend"><legend>What pests were found</legend>
+		 <input name="PESTS_FOUND_APHIDS" type="checkbox" value="1">Aphids</br>
+		 <input name="PESTS_FOUND_GRASSHOPPER" type="checkbox" value="1">Grasshopper</br>
+		 <input name="PESTS_FOUND_BUDWORM" type="checkbox" value="1">Bud worm</br>
+		 <input name="PESTS_FOUND_ANTS" type="checkbox" value="1">Ants</br>
+		 <input name="PESTS_FOUND_CUTWORM" type="checkbox" value="1">Cutworm</br>
+		 <input name="PESTS_FOUND_NO_PESTS_FOUND" type="checkbox" onclick="deseleckAll('pests');" value="1">There were no pests found</br>
+
+		 </fieldset> </label>
+		 
+		 
+		 
+		 
+	  <label>What disease has been indentified<br>
+		 <input name="DISEASE_INDENTIFIED_BUSHY_TOP" type="checkbox" value="1">Bushy top</br>
+		 <input name="DISEASE_INDENTIFIED_TMV" type="checkbox" value="1">TMV</br>
+		 <input name="DISEASE_INDENTIFIED_PVY" type="checkbox" value="1">PVY</br>
+		 <input name="DISEASE_INDENTIFIED_PERONOSPORA" type="checkbox" value="1">Peronospora</br>
+		 <input name="DISEASE_INDENTIFIED_MILDEW" type="checkbox" value="1">Mildew</br>
+		 <input name="DISEASE_INDENTIFIED_BLUE_MOULD" type="checkbox"  value="1">Blue mold</br>
+		 <input name="DISEASE_INDENTIFIED_NO_DISEASES_FOUND" type="checkbox" onclick="deseleckAll('diseases');" value="1">No diseases were found</br>
+	  </select> </label>
+
+
+	  <label>Children were perfoming the following tasks<br>
+		 <input name="CHILDREN_WERE_PERFOMING_THE_FOLLOWING_TASKS_WEEDING" type="checkbox" value="1">Weeding</br>
+		 <input name="CHILDREN_WERE_PERFOMING_THE_FOLLOWING_TASKS_TOPPING" type="checkbox" value="1">Topping</br>
+		 <input name="CHILDREN_WERE_PERFOMING_THE_FOLLOWING_TASKS_FERTILIZER" type="checkbox" value="1">Fertiliser</br>
+		 <input name="CHILDREN_WERE_PERFOMING_THE_FOLLOWING_TASKS_CHEMICAL_APPLICATION" type="checkbox" value="1">Chemical app</br>
+		 <input name="CHILDREN_WERE_PERFOMING_THE_FOLLOWING_TASKS_OTHERS" type="checkbox" value="1">Others</br>
+		 <input name="CHILDREN_WERE_PERFOMING_THE_FOLLOWING_TASKS_NO_CHILDREN_WORKING" type="checkbox"  value="1">Blue mold</br>
+		 <input name="DISEASE_INDENTIFIED_NO_DISEASES_FOUND" type="checkbox" onclick="deseleckAll('diseases');" value="1">No children were working</br>
+	  </select> </label>
+
+
+	 <label>Paid labour was by
+		 <select name="PAID_LABOUR_WAS_BY">
+	     <option value="Cash">Cash</option>
+		 <option value="Food">Food</option>
+	  </select> </label>
+
+
+<label>What is the estiated additional hectarage (ha)<input  type="number" min="0"  name="ESTIMATED_ADDITIONAL_HA"></label>
+<label>Paid labour was paid by
+		 <select name="PAID_LABOUR">
+		   <option value="Cash">Cash</option>
+		   <option value="Food">Food</option>
+		   <option value="There_was_no_paid_labour">There was no paid labour</option>
+  </select> </label>
+    <label>No of people involved<input  type="number" min="0"  name="TOTAL_OF_PEOPLE"></label>
+    <label>No of days worked<input  type="number" min="0"  name="TOTAL_NUMBER_OF_DAYS_WORKED"></label>
+
+	<label>Are there any signs of adverse weather<br>
+
+	         <input name="ANY_SIGNS_OF_ADVERSE_WEATHER" type="radio" value="YES" onclick="showClass('adverseWeather')">Yes</br>
+	     <input name="ANY_SIGNS_OF_ADVERSE_WEATHER" type="radio" value="NO" onclick="hideClass('adverseWeather')">NO</br>
+     </label>	
+		  <label class="adverseWeather">What is the adverse weather noted
+		 <select name="ADVERSE_WEATHER_NOTED">
+	     <option value="None">None</option>
+	     <option value="Drought">Drought</option>
+		 <option value="Excess_rain">Excess rain</option>
+		 <option value="Wind">Wind</option>
+		 <option value="Hail">Hail</option>
+		 <option value="Erosion">Erosion</option>
+	  </select> </label>	
+	
+	
+	 <label class="adverseWeather" >What is the potential impact of adverse weather to deliver contract volume
+		 <select name="POTENTIAL_IMPACT_OF_ADVERSE_WEATHER">
+	     <option value="None">None</option>
+	     <option value="Very_Low">Very low - Less than 5 %</option>
+		 <option value="Low">Low - Less than 5-10 %</option>
+		 <option value="Medium">Medium - 10-20 %</option>
+		 <option value="High">High - 20- 30 %</option>
+		 <option value="Very_high ">Very high - 30 % and above</option>
+	 </select> </label>	
+	
+	  <label>What is the estimated woodfuel requirement to cure the crop  <input  type="number" min="0"  name="ESTIMATED_WOODFUEL"></label>
+	  <label>What is the estimated volume (Kg)<input  type="number" min="0"  name="ESTIMATED_VOLUME_KG"></label>
+
+	
+			
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+  
+       function hideClass(className)
+{
+$("." + className).hide();
+}
+
+function showClass(className)
+{
+$("." + className).show();
+}
+
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+	
+	hideClass("desuckerideApplied");
+	 hideClass('adverseWeather');
+	  
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "topping_foliar_applicationv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>

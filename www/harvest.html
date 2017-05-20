@@ -1,0 +1,251 @@
+<div class="form-style-10">
+<h1>Harvest and Curing</h1>
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+<div class="section"></div>
+<div class="innerx-wrap">
+<input type="hidden" name="CAPTURER"  id="CAPTURER"  placeholder="Enter your Name" />
+	    <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to load" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+				             		
+       <label>What is the stage of crop harvesting
+		<select name="STAGE_OF_CROP_HARVESTING">
+		<option value="Ripe">Ripe</option>
+		<option value="Mature">Mature</option>
+		<option value="Immature_leaves">Immature leaves</option>
+		</select>
+		</label>
+		
+   <label>Did the farmer cure as recommended
+		<select name="CURE_AS_RECOMMENDED">
+	 <input name="GROW_CASH_CROPS" type="radio" value="yes" onclick="hideClass('cureAsRecommended')">Yes</br>
+     <input name="GROW_CASH_CROPS" type="radio" value="No" onclick="showClass('cureAsRecommended')">No</br>
+		 
+		</select>
+		</label>
+	 <label class="cureAsRecommended">What was the reason for not curing as recommended
+		<select name="REASON">
+		<option value="poor_reaping">poor reaping</option>
+		<option value="Over_packing">Over packing</option>
+		</select>
+		</label>
+	
+	<label>What is the source of energy for curing
+		<select name="SOURCE_OF_ENERGY">
+		<option value="Wood">Wood</option>
+		<option value="Briquettes">Briquettes</option>
+		</select>
+		</label>
+   
+   <label>Does the farmer have adequate and usable hessian to cover his harvest
+		<select name="ADEQUATE_AND_USABLE_HESSIAN">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		</label>
+		
+  <label>Has the farmer received sufficient cotton twine
+		<select name="HAS_THE_FARMER_RECEIVED_SUFFICIENT_COTTON_TWINE">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		</label>
+		
+<label>Children were performing the following tasks<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_TOPPING"   value="topping" >Topping<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_REAPING"   value="reaping">Reaping<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_SORTING"   value="sorting">Sorting<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_CARRYING_TOB"   value="carrying_tob">Carrying tob<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_TYING/CURING"   value="tying_curing">Tying/curing<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_STORAGE"   value="storage">Storage<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_OTHER"   value="storage">Other<br>
+		<input type="checkbox" name="CHILDREN_WERE_PERFORMING_THE_FOLLOWING_TASKS_NO_CHILDREN_WORKING"   value="storage">No children were working on this farm<br>
+</label>
+		
+
+			   <label>Paid labour was paid by
+			       <select name="PAID_BY">
+			           <option value="Cash">Cash</option>
+					   <option value="Food">Food</option>
+					   <option value="No_paid_labour">There was no paid labour</option>
+					</select> 
+	         </label>	
+		
+		
+        <label>No of people involved<input type="number" min=0 name="PEOPLE_INVOLVED" /></label>      		
+        <label>No of days worked<input type="number" min=0 name="DAYS_WORKED" /></label>      		
+        	  
+
+<label>What is the adverse weather noted<br>
+		<input type="checkbox" name="ADVERSE_WEATHER_NOTED_DROUGHT"   value="1" >Drought<br>
+		<input type="checkbox" name="ADVERSE_WEATHER_NOTED_EXCESS_RAIN"   value="1">Excess rain<br>
+		<input type="checkbox" name="ADVERSE_WEATHER_NOTED_WIND"   value="1">wind<br>
+		<input type="checkbox" name="ADVERSE_WEATHER_NOTED_HAIL"   value="1">Hail<br>
+		<input type="checkbox" name="ADVERSE_WEATHER_NOTED_EROSION"   value="1">Erosion<br>
+</label> 		
+       
+
+
+
+  <label>What is the potential impact of the adverse weather to deliver contract volume
+			       <select name="POTENTIAL_IMPACT_OF_THE_ADVERSE_WEATHER">
+			           <option value="NONE">NONE</option>
+			           <option value="Very_Low">Very Low - &lt; 5%</option>
+					   <option value="Low">Low 5-10%</option>
+					   <option value="Medium">Medium 10-20%</option>
+					   <option value="High">High 20-30%</option>
+					   <option value="Very_High">Very High &gt; 30%</option>
+					</select> 
+	         </label>	
+		
+<label>What NTRM has been identified<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_PLASTIC"   value="1" >Plastic<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_FEATHERS"   value="1">Feathers<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_INSECTS"   value="1">Insects<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_MATERIAL"   value="1">material<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_CROP_RESIDUE"   value="1">crop residue<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_OTHER_ORGANIC_MATERIAL"   value="1">other organic material<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_OTHER_INORGANIC_MATERIAL"   value="1">other inorganic material<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_STRING"   value="1">string<br>
+		<input type="checkbox" name="NTRM_IDENTIFIED_THERE_IS_NO_NTRM"   value="1">there is no NTRM<br>
+</label> 		
+
+
+ <label>What is the Leaf index (QTY)<input type="number" name="WHAT_IS_THE_LEAF_INDEX_QTY" /></label>      		
+ <label>Visit Field Estimate (Kg)<input type="number" min=0 name="VISIT_FIELD_ESTIMATE_KG" /></label>      		
+ 
+
+   <label>Does the farmer have tobacco in the barn
+		<select name="DOES_THE_FARMER_HAVE_TOBACCO_IN_THE_BARN">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		</label>
+
+ <label>What is the estimated quantity in the barn<input type="number" name="WHAT_IS_THE_ESTIMATED_QUANTITY_IN_THE_BARN" /></label>      		
+    <label>Score the farmer's ability of curing
+		<select name="SCORE_THE_FARMERS_ABILITY_OF_CURING">
+		<option value="Poor">Poor</option>
+		<option value="fair">fair</option>
+		<option value="Good">Good</option>
+		<option value="Excellent">Excellent</option>
+		</select>
+		</label>
+		
+
+  <label>Does the farmer have cured tobacco in the store
+		<select name="DOES_THE_FARMER_HAVE_CURED_TOBACCO_IN_THE_STORE">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		</label>
+		
+<label>What is the estimated quantity in the store<input type="number" name="WHAT_IS_THE_ESTIMATED_QUANTITY_IN_THE_STORE" /></label>
+      
+
+		   <div class="button-section">
+     <input type="button" value="upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+       function hideClass(className)
+{
+$("." + className).hide();
+}
+
+function showClass(className)
+{
+$("." + className).show();
+}
+
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "harvesting__curingv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>

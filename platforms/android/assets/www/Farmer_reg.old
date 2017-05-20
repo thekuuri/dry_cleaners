@@ -1,0 +1,283 @@
+<div class="form-style-10">
+<h1>Farmers Registration</h1>
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+<script src="js/Coordinates.Area.Measure.js"></script>
+
+<div class="section"></div>
+<div class="innerx-wrap">
+<label>User<input type="text" name="CAPTURER" id="CAPTURER" placeholder="Enter your Name" /></label>
+	    <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to load" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+				
+        <label>Barcode <input type="text" name="BARCODE" id="barcode" name="barcode" placeholder="Click to reload" readonly /></label>			
+        <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+		
+        <label>Photo: <span id="id_TakePhoto" class="icon fa-camera"></span><input type="button" value="Take Photo" class="icon fa-camera" onclick="CaptureImage_base64();">
+		<input type="text" name="imageAttachment" id="imageAttachment">
+		 </label>
+		
+		
+        <label>Gender <select name="GENDER"> <option value="Male">Male</option> <option value="Female">Female</option> </select> </label>
+        <label>No. of Dependants under 18 <input  type="number" min="0" max="30" name="DEPENDANTS_UNDER_18"></label>
+		<label>Education Level
+		<select name="EDUCATION_LEVEL">
+		<option value="informal">Informal</option>
+		<option value="Kindergarten">Kindergarten</option>
+		<option value="Primary">Primary</option>
+		<option value="Highschool">Highschool</option>
+		<option value="Tertiary">Tertiary(Technical)</option>
+		<option value="College">College</option>
+		</select>
+		</label>
+		
+        <label>Cell Phone <input type="number" name="CELLPHONE" /></label>      		
+        <label>Contracted Volume (Ha)<input type="text" name="FARMER_CONTRACTED_VOLUME" />
+        <input type="text" name="LAND_GPS_POLYGON" /></label>
+		<label>
+			<!---------  --------  -->
+	<div class="button-section">
+	 <input type="button" id="gps" class="gpsButton"  value="Start GPS Point capturing" onclick="startPointFetching();" />
+     <input type="button" value="Stop"  onclick="stopPointFetch();">
+     <input type="button" value="Calculate Area"  onclick="getArea();">
+    </div>
+	Your area is ~: <span id="areaHolder"></span>
+	</label>
+   	<!---------  --------  -->
+	
+		
+		
+		
+        <label>Grow Cash crops?<select name="GROW_CASH_CROPS" id="cashCrop" > <option value="yes" onclick="CashCropView('visible')">Yes</option> <option value="No" onclick="CashCropView('hidden')">No</option></select>
+         <fieldset id="CashLegend"><legend>Cash Crops</legend>
+		 <input name="CASH_CROPS_MAIZE" type="checkbox" value="1">Maize</br>
+		 <input name="CASH_CROPS_SUGAR_CANE" type="checkbox" value="1">Cane</br>
+		 <input name="CASH_CROPS_TEA" type="checkbox" value="1">Tea</br>
+		 <input name="CASH_CROPS_COFFEE" type="checkbox" value="1">Coffee</br>
+		 <input name="CASH_CROPS_CASSAVA" type="checkbox" value="1">Cassava</br>
+		 <input name="CASH_CROPS_GROUNDNUTS" type="checkbox" value="1">Groundnuts</br>
+		 </fieldset>
+		</label>
+        <label>Grow food crops? <select name="GROW_FOOD_CROPS"> <option value="yes">Yes</option> <option value="No">No</option></select> 
+		   <fieldset id="CashLegend"><legend>food crops</legend>
+		 <input name="FOOD_CROPS_MAIZE" type="checkbox" value="1">Maize</br>
+		 <input name="FOOD_CROPS_BEANS" type="checkbox" value="1">Beans</br>
+		 <input name="FOOD_CROPS_SWEET_POTATOES" type="checkbox" value="1">Sweet Potatoes</br>
+		 <input name="FOOD_CROPS_IRISH_POTATOES" type="checkbox" value="1">Irish Potatoes</br>
+		 <input name="FOOD_CROPS_PEAS" type="checkbox" value="1">Peas</br>
+		 <input name="FOOD_CROPS_CASSAVA" type="checkbox" value="1">Cassava</br>
+		 <input name="FOOD_CROPS_GROUNDNUTS" type="checkbox" value="1">Groundnuts</br>
+
+		 </fieldset>
+		</label>
+        <label>Sharing barn space with another farmer? <select name="SHARING_BARN_SPACE"> <option value="yes">Yes</option> <option value="No">No</option></select> </label>
+        <label>Farmer's woodFuel requirement(cubic meters)? <input type="text" name="TARGET_WOOD_FUEL_REQUIREMENT" /></label>
+	    <label>Has a lockable Chemical store? <select name="LOCKABLE_CHEMICAL_STORE"> <option value="yes">Yes</option> <option value="No">No</option></select> </label>
+        <label>Has sufficient woodfuel for curing? <select name="SUFFICIENT_WOODFUEL"> <option value="yes">Yes</option> <option value="No">No</option></select> </label>
+        <label><fieldset><legend>Source of woodFuel</legend>
+		 <input name="SOURCE_OF_WOODFUEL_OWN_PLANTATION" type="checkbox" value="1">Own Plantation</br>
+		 <input name="SOURCE_OF_WOODFUEL_BRIQUETTES" type="checkbox" value="1">Briquettes</br>
+		 <input name="SOURCE_OF_WOODFUEL_MERCHANTS" type="checkbox" value="1">Merchants</br>
+		   </fieldset>
+		   </label>
+		 <label>How many cubic meters does he have? <input type="number" name="CUBIC_METRES" /></label> 
+		 <label>
+		 <fieldset>
+		 <legend>Does he intend to get more woodFuel?</legend>
+		  <input name="OBTAIN_ADDITIONAL_WOODFUEL_OWN_PLANTATION" type="checkbox" value="1">Own Plantation</br>
+		 <input name="OBTAIN_ADDITIONAL_WOODFUEL_NATATURAL_FOREST" type="checkbox" value="1">Forest</br>
+		 <input name="OBTAIN_ADDITIONAL_WOODFUEL_MERCHANTS" type="checkbox" value="1">Merchants</br>
+		 </fieldset>
+		 </label>
+		 <label>How will the farmer aquire additional woodFuel
+		   <select name=""> 
+		   <option value="Own_Plantation">Own Plantation</option>
+		   <option value="Natural_Forest">Natural Forest</option>
+		   <option value="Merchants">Merchants</option>
+		   </select>
+		   </label> 
+        <label>Has separate storage space specifically for tobacco ?<select name="SEPARATE_STORAGE_SPACE"><option value="yes">Yes</option> <option value="No">No</option></select> </label>	   
+    
+    
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+	<div class="innerx-wrap">
+
+<style>
+
+.gpsButton{ background-color:#00ff00; color:#ff0000;}
+.resetButton{color:#ff0000;}
+
+</style>
+<script>
+var pointFetcher;
+
+
+function startPointFetching()
+{
+//Fetch Point every 3 seconds.
+pointFetcher = setInterval(fetchPoint_calculateArea, 3000);
+alert("Timer Set");
+return 0;
+}
+
+function resetCount()
+{
+if (confirm("Are you sure you want to clear the distance coordinates ?")==true)
+	{
+stopPointFetch();
+resetArea();
+}
+return 0;
+}
+
+function fetchPoint_calculateArea()
+{
+fetchPoint();
+getArea();
+
+return 0;
+}
+
+function stopPointFetch()
+{
+alert("Timer Stopped");
+$("#LAND_GPS_POLYGON").val(allCoords);
+$("#FARMER_CONTRACTED_VOLUME").val(landArea/10000).toFixed(2);
+
+clearInterval(pointFetcher);
+getArea();
+
+return 0;
+}
+
+</script>
+  
+
+	
+   <script>
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "farmer_registrationv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	 $("#id_TakePhoto").click(function(){
+	     CaptureImage_base64();
+	   });
+	
+	
+	
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+function CaptureImage_base64()
+			{
+			/* alert("Camera Call initiated NEW - base64");
+		   imageQuality=prompt("Image Quality -64",10);
+		   */
+		    imageQuality=20;
+			navigator.camera.getPicture(onSuccessBS64, onFail, { quality: imageQuality,destinationType: Camera.DestinationType.DATA_URL });
+			}
+			
+				function onSuccessBS64(imageData)
+				{
+			
+					 var imageString_Holder = document.getElementById('imageAttachment');
+					 imageString_Holder.value = "data:image/jpeg;base64," + imageData;
+				   /*  alert("Size is:");
+					 alert(imageData.length); */
+				}
+				
+			
+			   function onFail(message) {
+			 		alert('Failed because: ' + message);
+			   }
+		 
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>

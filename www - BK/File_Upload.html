@@ -1,0 +1,15 @@
+<script src="assets/js/Settings.js"></script>
+<div class='login-card'>
+<h1>Attach File</h1><br>
+<span id='fileScript'></span>
+</div>
+<script>
+
+var capturer;
+capturer=window.localStorage.getItem('currentUserID');
+
+var formString="<form  action='" + serverAddress + "/GisFiles/www/fileUpload.php' method='POST'  enctype='multipart/form-data'>Comment<input type='text' name='COMMENT'><br>Capturer<input type='text' name='CAPTURER' id='CAPTURER' value=" + capturer + " readonly>File<input type='file' name='file1' value='attach file'><br><div>-----</div><input type='Submit' value='upload file' class='login login-submit'></form>";
+
+document.getElementById("fileScript").innerHTML=formString;
+
+</script>

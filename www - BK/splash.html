@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<!--
+	Prologue by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>BAT Leaf | GIS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		
+		<script src="sqlLite.js"></script>
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/form.css" />
+ <style type="text/css">
+            #barcode,#gps
+            {
+			width:100%;
+			height:2em;
+			background-position:left center;
+          	color: #0000cf;
+			padding-left:3em;
+			font-weight:300;
+			border:none;
+            }
+			#barcode
+			{
+			   background: url(bscan.png) no-repeat;
+		       background-size: 3em 2em;
+			}
+			#gps
+			{
+              background: url(pin.png) no-repeat;
+			  background-size: 2em 2em;
+			}
+			
+			.connectionIconON{
+			  position:absolute;
+			   width:100%;
+			  background-image: url("connectionON.png");
+			   background-size: 20px 20px;
+              background-repeat: no-repeat;
+			   background-color: #2f2f2f;
+			  background-position: center; 
+			}
+			
+				.connectionIconOFF{
+				 position:absolute;
+				 width:100%;
+			  background-image: url("connectionOFF.png");
+			    background-size: 20px 20px;
+              background-repeat: no-repeat;
+			   background-color: #2f2f2f;
+			  background-position: center; 
+			}
+			
+			
+			.zad,body{
+			 background-color: #41484c;
+			}
+			
+        </style>
+    
+	</head>
+	<body>
+
+		<!-- Header -->
+			<div id="header">
+
+				<div class="top">
+
+					<!-- Logo -->
+						<div id="logo">
+							<h1 id="title"><span class="icon fa-envira"></span>BAT Leaf | GIS <br> User :<span id="LogonuserID"></span></h1>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+											<ul>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('Farmer_Contracting.html');" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-user-plus">Farmer Contracting</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('Farmer_reg.html');" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-pencil-square-o">Farmer Reg</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('Conservation.html');" id="portfolio-link" class="skel-layers-ignoreHref" ><span class="icon fa-pied-piper">Conservation Site</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('Tree_Census.html');" id="portfolio-link" class="skel-layers-ignoreHref" ><span class="icon fa-calculator">Tree Census</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('Site_Establishment.html');" id="portfolio-link" class="skel-layers-ignoreHref" ><span class="icon fa-tree">Site Establishment</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('Sowing_Activity.html');" id="portfolio-link" class="skel-layers-ignoreHref" ><span class="icon fa-tree">Sowing Activity</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('Clipping_Activity.html');" id="portfolio-link" class="skel-layers-ignoreHref" ><span class="icon fa-tree">Clipping Activity</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="about-link" onclick="loadPg('Top-dressing_and_Plant_Count.html');" class="skel-layers-ignoreHref"><span class="icon fa-list-ol">Top dressing and Counting</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="about-link" onclick="loadPg('Basal_Application_Transplanting.html');" class="skel-layers-ignoreHref"><span class="icon fa-braille">Basal Application</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="about-link" onclick="loadPg('Topping_Foliar_Application.html');" class="skel-layers-ignoreHref"><span class="icon fa-th-large">Topping Foliar Application</span></a></li>
+								
+								<li><a class="sideLink" href="javascript:void(0);" id="about-link" onclick="loadPg('cell_meeting.html');" class="skel-layers-ignoreHref"><span class="icon fa-users">Cell Meeting</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" onclick="loadPg('harvest.html');" class="skel-layers-ignoreHref"><span class="icon fa-pagelines">Harvesting</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref" onclick="loadPg('marketing_after.html');"><span class="icon fa-money">Market and After</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref" onclick="loadPg('School_and_Hygiene.html');" ><span class="icon fa-graduation-cap">Education and Hygiene </span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref" onclick="loadPg('land_holding.html');" ><span class="icon  fa-map-o">Land Holding</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref"  onclick="loadPg('Barns.html');" ><span class="icon fa-bank">Barns </span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref"  onclick="loadPg('wood_usage.html');"><span class="icon fa-eyedropper">Wood usage</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref"  onclick="loadPg('End_Of_Season.html');"><span class="icon fa-cube">End of Season </span></a></li>
+								<br>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="loadPg('File_Upload.html');" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-paperclip">File Attachement</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref"  onclick="loadPg('dist_calculator.html');"><span class="icon fa-map">Distance Calculator</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref"  onclick="SyncOfflineRecords();"><span class="icon fa-refresh">Offline Sync</span></a></li>
+								<li><a class="sideLink" href="javascript:void(0);" id="contact-link" class="skel-layers-ignoreHref"  onclick="changeServer();"><span class="icon fa-gears">Server Address</span></a></li>
+								
+								<br>
+								<li><a class="sideLink" href="javascript:void(0);" onclick="signOut();" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-sign-out">Exit</span></a></li>
+							
+								
+								</ul>
+						</nav>
+
+				</div>
+
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Data Form -->
+				<div id="connectionIcon" class="connectionIconON">&nbsp;</div> 
+<section id="top" class="formSection zad dark cover" >
+
+<div class="form-style-10">
+<h1>
+ Welcome to BAT Leaf GIS App  
+  <br><img src="batIcon.png" width="20%" height="70%" > 
+    </h1>
+<span>Use the green button above to access the forms</span>
+
+
+</div>
+		</section>
+
+			</div>
+
+		<!-- Footer -->
+	
+
+		<!-- Scripts  --> 
+		        <script type="text/javascript" src="cordova.js"></script>
+                <script type="text/javascript" src="js/index.js"></script>
+					   
+                <script type="text/javascript" src="gps.js"></script>
+                <script  src="assets/js/Settings.js"></script>
+	
+		    <script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollzer.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+
+		    <link href="css/toastr.css" rel="stylesheet" type="text/css" />
+			<script src="js/toastr.js"></script>
+			     
+<script>
+
+
+
+function loadPg(url)
+{
+//to Prevent Caching, add a timeStamp
+//alert("clciked");
+var d= new Date();
+//url="http://192.168.7.88/BATLeaf/www/" +  url;
+url= url + "?stampNoCache=" + d.getTime();
+//prompt(url,url);
+ $.get(url, function(data, status){
+		$(".formSection").html(data);
+		 navigator.vibrate(50);
+    });
+ 
+}
+
+function onDeviceReady() {
+    navigator.vibrate(50);
+}
+
+$(".sideLink").click(function(){
+    navigator.vibrate(10);
+});
+
+function signOut()
+{
+alert("Sign out complete");
+backtoLogin();
+}
+
+
+
+
+
+function SyncOfflineRecords()
+{
+loadPg("Offline_Sync.html");
+sqlLite.webdb.CountOfflineRecords();
+// Wait for a few seconds for the SQLLite to execute and update the OfflineRecords localStorage - This is because SQL request are unasync - data is not returned on the go , the script proceeds to execute
+//setTimeout(showSqlCount, 3000);
+}
+
+function showSqlCount()
+{
+OfflineRecords=0;
+OfflineRecords=window.localStorage.getItem("OfflineRecords");
+if (OfflineRecords == null)
+{
+OfflineRecords=0;
+}
+$("#footerMsg").html("There are " +  OfflineRecords + " offline forms"); 
+}
+
+		$("#upload_btn").click( function(){
+		//var v=confirm("Your are about to submit this form");
+		  showInfo("info","Data succesfully uploaded!","upload complete");
+		
+	});
+	
+function showInfo(msgType,displayMsg,msgTitle)
+{
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-center",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+toastr[msgType](displayMsg,msgTitle);
+navigator.vibrate(100);
+}	 
+	 
+	$(document).ready(function() {
+	//Initialize the sqlLite
+	sqlLiteinit();
+
+	//load current User
+   currentUserID = window.localStorage.getItem("currentUserID");
+   if(currentUserID == null)
+   { currentUserID="."; }
+   
+	if(currentUserID.length<=2)
+		{
+		 showInfo("error","Logon Error - Try again","Session Expired");
+      	 //setTimeout(backtoLogin, 1500);
+			
+		} else
+		{
+		   //showInfo("info","Logon User:" + currentUserID,"Authentication Successful");
+		   $("#LogonuserID").html(currentUserID);
+		}
+	 		
+
+	
+			
+});
+
+
+
+function backtoLogin()
+{
+window.localStorage.setItem("currentUserID", "");
+window.location="index.html";
+		
+}
+
+    </script>
+
+
+
+	</body>
+</html>

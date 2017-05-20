@@ -1,0 +1,231 @@
+<div class="form-style-10">
+<h1>End Of Season</h1>
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+<div class="section"></div>
+<div class="innerx-wrap">
+<input type="hidden" name="CAPTURER" id="CAPTURER"  placeholder="Enter your Name" />
+	    <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to load" readonly />
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+				
+        <label>Barcode <input type="text" name="BARCODE" id="barcode" name="barcode" placeholder="Click to reload"  /></label>			
+        <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+		
+        <label>Does the farmer intend to grow tobacco next season <select name="GROW_TOBACCO_NEXT_SEASON">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select> </label>
+					
+        <label>Has the farmer uprooted and destroyed his tobacco stalks<select name="UPROOTED_AND_DESTROYED">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select> </label>
+
+  <label> <fieldset id=""><legend>What crops have been planted after the tobacco</legend>
+		 <input name="CROPS_AFTER_TOBACCO_MAIZE" type="checkbox" value="1" />Maize</br>
+		 <input name="CROPS_AFTER_TOBACCO_BEANS" type="checkbox" value="1" />Beans</br>
+		 <input name="CROPS_AFTER_TOBACCO_SWEET_IRISH_POTATOES" type="checkbox" value="1" />Irish Potatoes</br>
+		 <input name="CROPS_AFTER_TOBACCO_PEAS" type="checkbox" value="1" />Peas</br>
+		 <input name="CROPS_AFTER_TOBACCO_TOMATOES" type="checkbox" value="1" />Tomatoes</br>
+		 <input name="CROPS_AFTER_TOBACCO_ONION" type="checkbox" value="1" />Onion</br>
+		 <input name="CROPS_AFTER_TOBACCO_CASSAVA" type="checkbox" value="1" />Cassava</br>
+		 <input name="CROPS_AFTER_TOBACCO_MILLET" type="checkbox" value="1" />Millet</br>
+		 <input name="CROPS_AFTER_TOBACCO_BANANAS" type="checkbox" value="1" />Banana</br>
+		 <input name="CROPS_AFTER_TOBACCO_VEGETABLES" type="checkbox" value="1" />Vegetable</br>
+		 <input name="CROPS_AFTER_TOBACCO_SUGAR_CANE" type="checkbox" value="1" />Sugar Cane</br>
+		 <input name="CROPS_AFTER_TOBACCO_COTTON" type="checkbox" value="1" />Cotton</br>
+		 </fieldset>
+		</label>
+								
+        <label>Did the farmer plant trees this season<select name="PLANT_TREES_THIS_SEASON">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select> </label>
+		
+        <label>Number of seedlings<input  type="number" min="0"  name="NUMBER_OF_SEEDLINGS"></label>
+		<label>Source of tree seedlings<br>
+		  <input name="SOURCE_OF_TREE_SEEDLINGS_BAT_TREE_NURSERY" type="checkbox" value="1" />BAT Tree Nursery</br>
+		  <input name="SOURCE_OF_TREE_SEEDLINGS_PURCHASE_FROM_COMMERCIAL_TREE_NURSERY" type="checkbox" value="1" />Purchase from commercial tree nursery</br>
+		  <input name="SOURCE_OF_TREE_SEEDLINGS_OWN_TREE_NURSERY" type="checkbox" value="1" />Own tree nursery</br>
+		  <input name="SOURCE_OF_TREE_SEEDLINGS_OTHER" type="checkbox" value="1" />Others</br>
+		</label>		
+        <label>Survival rate for trees (%)<input type="number" min="0" name="SURVIVAL_RATE_FOR_TREES" /></label>  
+		
+		 <label>Score on quality and presentation of trees<select name="PLANT_TREES_THIS_SEASON">
+		<option value="Poor">Poor</option>
+		<option value="fair">fair</option>
+		<option value="Good">Good</option>
+		<option value="Excellent">Excellent</option>
+		</select> </label>
+
+		
+		<label>Why did the farmer not plant any trees<input type="text" name="FARMER_NOT_PLANT_ANY_TREES" /></label>
+		<label>What was the amount of woodfuel utilised to cure the crop<input type="number" name="AMOUNT_OF_WOODFUEL" /></label>
+		
+    <label>
+         <fieldset id=""><legend>Was the farmer satisfied with the season performance?</legend>
+		Price<select name="SEASON_PRICE">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		<br>
+		Quality<select name="SEASON_QUALITY">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		<br>
+		 Yield<select name="SEASON_YIELD">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		<br>
+		 Extension support<select name="SEASON_EXTENSION_SUPPORT">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		<br>
+		 Transport support<select name="SEASON_PAYMENT_CYCLES">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+		</select>
+		</select>
+		
+		 </fieldset>
+		</label>		
+		
+        <label>Has the farmer disposed of chemical containers
+		<select name="DISPOSED_CHEMICALS">
+		<option value="yes">Yes</option>
+		<option value="No">No</option>
+		</select> 
+		 
+		 <fieldset id="CashLegend"><legend>What method was used to dispose of the chemical containers</legend>
+		 <input name="CHEMICALS_METHOD_USED_BURNT" type="checkbox" value="1" />Burnt</br>
+		 <input name="CHEMICALS_METHOD_USED_BURIED" type="checkbox" value="1" />Buried</br>
+		 <input name="CHEMICALS_METHOD_USED_DESTROYED_AND_DUMPED" type="checkbox" value="1" />Destroyed and dumped</br>
+		 <input name="CHEMICALS_METHOD_USED_RETURNED" type="checkbox" value="1" />Returned to leaf centre</br>
+		 </fieldset>
+		</label>
+		
+		
+		     <label>Has the farmer disposed the fertiliser bags
+		<select name="DISPOSED_BAGS">
+		<option value="yes">Yes</option>
+		<option value="No">No</option>
+		</select> 
+		 
+		 <fieldset id="CashLegend"><legend>What method was used to dispose the bags</legend>
+		 <input name="BAGS_METHOD_USED_BURNT" type="checkbox" value="1" />Burnt</br>
+		 <input name="BAGS_METHOD_USED_BURIED" type="checkbox" value="1" />Buried</br>
+		 <input name="BAGS_METHOD_USED_DESTROYED_DUMPED" type="checkbox" value="1" />Destroyed and dumped</br>
+		 <input name="BAGS_METHOD_USED_BUY_BACK" type="checkbox" value="1" />Returned to leaf centre</br>
+		 </fieldset>
+		</label>
+		
+		
+        <label>Did the farmer pay off his loan<select name="LOAN_REPAID"> <option value="yes">Yes</option> <option value="No">No</option></select> </label>
+   
+    
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "end_of_seasonv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+		  v=prompt("urlPost:",urlPost);
+		   v=prompt("farmerInfo:",$("#farmerInfo").serialize());
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+		  
+		   
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>

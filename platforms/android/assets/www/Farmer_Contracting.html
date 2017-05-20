@@ -1,0 +1,106 @@
+<div class="form-style-10">
+<h1>Farmer Contracting</h1>
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+<div class="section"></div>
+<div class="innerx-wrap">
+<input type="hidden" name="CAPTURER" id="CAPTURER"  readonly />
+<label>Barcode <input type="text" name="BARCODES_BARCODE_1" id="barcode"  placeholder="Click to scan" /></label>			
+ <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+		<label>Region<select name="LEAF_CENTRE">
+		<option value="Eastern">Eastern</option>
+		<option value="Western">Western</option>
+		<option value="Nyanza">Nyanza</option>
+	</select>
+		</label>
+        <label>Number of Contracts Signed <input  type="number" min="0"  name="NUMBER_OF_CONTRACTS" max=5></label>
+		
+		   <div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+  
+   <script>
+  
+
+document.getElementById("barcode").addEventListener("click", scan);
+
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "farmer_contractingv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+	//alert(connectionStatus);
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   //alert(urlPost);
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+			   //alert(data);
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>
+						

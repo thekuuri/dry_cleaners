@@ -1,0 +1,231 @@
+<div class="form-style-10">
+<h1>Top dressing and Plant Count</h1>
+
+
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+
+<div class="section"></div>
+<div class="inner-wrap">
+<input type="hidden" name="CAPTURER" id="CAPTURER" placeholder="Enter your Name" readonly/>
+	    <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to reload" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+      <label>Barcode <input type="text" name="BARCODE" id="barcode" name="barcode" placeholder="Click to reload" readonly /></label>			
+ <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+ 
+ 
+ 
+        
+         <label>What top dress was applied<select name="TOP_DRESS">
+	     <option value="CAN">CAN</option>
+		 <option value="KNO3">KNO3</option>
+	      </select>
+	    </label>
+	  
+	  <label>Type of topdress ferterlizer<input  type="text"  name="TYPE_OF_TOP_DRESSING"></label>
+	  <label>Number of bags (50Kgs) applied<input  type="number" min=0 name="BAGS_TOP_DRESSING_APPLIED"></label>
+	  <label>Date of Application<input  type="date"  name="APPLICATION_TOP_DRESSING"></label>
+	  <label>What is the plant population<input  type="number" min=0  name="PLANT_POPULATION"></label>
+	  <label>Were all necessary inputs recived
+	   <select name="NECESSARY_INPUTS_RECEIVED">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select>
+	  </label>
+		 	  <label>When are outstanding inputs to be recived<input  type="date"  name="INPUTS_TO_BE_RECEIVED"></label>
+		 
+	     <label>Does he have complete set of PPE
+		 <select name="COMPLETE_SET_OF_PPE">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	      <label>Does he use PPE
+		 <select name="USE_PPE">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  
+	  	  </select> </label>
+	      <label>Is crop establishment even
+		 <select name="CROP_ESTABLISHMENT">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  
+	  <label>What is the survival rate since transplanting (%)<input type="number" min=0 name="SURVIVAL_RATE" /></label>
+	  <label>Is the field clean of weeds
+		 <select name="CLEAN_OF_WEEDS">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  <label>What diseases were found
+		 <select name="DISEASES_WERE_FOUND">
+	     <option value="No_diseases_were_found">No diseases were found</option>
+	     <option value="Bushy_top">Bushy top</option>
+		 <option value="TMV">TMV</option>
+		 <option value="PVY">PVY</option>
+		 <option value="Peronospora">Peronospora</option>
+		 <option value="Mildew">Mildew</option>
+		 <option value="Blue_mold">Blue mold</option>
+	  </select> </label>
+	
+	 <label>Did the farmer grow additional volumes
+		 <select name="FARMER_DGROW_ADDITIONAL_VOLUMES">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+
+<label>What is the estimated additional hectarage (ha)<input  type="number" min="0"  name="ESTIMATED_ADDITIONAL_HA"></label>
+<label>Paid labour was paid by
+		 <select name="PAID_LABOUR">
+		   <option value="Cash">Cash</option>
+		   <option value="Food">Food</option>
+		   <option value="There_was_no_paid_labour">There was no paid labour</option>
+  </select> </label>
+		
+    <label>No of people involved<input  type="number" min="0"  name="PEOPLE_INVOLVED"></label>
+    <label>No of days worked<input  type="number" min="0"  name="DAYS_WORKED"></label>
+
+	  <label>Was there any adverse weather<br>
+	     <input name="ADVERSE_WEATHER" type="radio" value="YES" onclick="showClass('adverseWeather')">Yes</br>
+	     <input name="ADVERSE_WEATHER" type="radio" value="NO" onclick="hideClass('adverseWeather')">NO</br>
+
+	  </select> </label>	
+		  
+		  <label class="adverseWeather">What is the adverse weather noted
+		 <select name="">
+	     <option value="None">None</option>
+	     <option value="Drought">Drought</option>
+		 <option value="Excess_rain">Excess rain</option>
+		 <option value="Wind">Wind</option>
+		 <option value="Hail">Hail</option>
+		 <option value="Erosion">Erosion</option>
+	  </select> </label>	
+	
+	
+	 <label class="adverseWeather">What is the potential impact of adverse weather to deliver contract volume
+		 <select name="IMPACT_OF_ADVERSE_WEATHER">
+	     <option value="None">None</option>
+	     <option value="Very_Low">Very low - Less than 5 %</option>
+		 <option value="Low">Low - Less than 5-10 %</option>
+		 <option value="Medium">Medium - 10-20 %</option>
+		 <option value="High">High - 20- 30 %</option>
+		 <option value="Very_high ">Very high - 30 % and above</option>
+	 </select> </label>	
+	
+	  <label>Yield estimate (Kg)<input  type="number" min="0"  name="YIELD_ESTIMATE_KG"></label>
+
+	
+
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+   
+   function hideClass(className)
+{
+$("." + className).hide();
+}
+
+function showClass(className)
+{
+$("." + className).show();
+}
+
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+      
+	  hideClass('adverseWeather');
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "top_dressing__plant_countv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>

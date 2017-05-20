@@ -1,0 +1,50 @@
+<div class="form-style-10">
+<h1>Offline Records</h1>
+<span id="footerMsg">Please wait...calculating offline records.</span>
+<input type="button" value="Stop Sync" onclick="stopSync();">
+<script>
+
+timerId= setTimeout(updateRecords, 3000);
+extraMsg="";
+var counter =0;
+function updateRecords()
+{
+ timerId= setTimeout(updateRecords, 3000);
+ sqlLite.webdb.CountOfflineRecords();
+//alert("Attemtp");
+OfflineRecords=window.localStorage.getItem("OfflineRecords");
+   if (OfflineRecords>0)
+  { 
+   extraMsg = " Attempting to upload the records...";
+   }
+  else {  
+       extraMsg="All Records successfully uploaded !"; 
+     clearTimeout(timerId);
+  
+  }
+  
+  $("#footerMsg").html("There are " +  OfflineRecords + " offline forms." + extraMsg + ".<br> Attempt:" + counter + " of 60");
+  counter=counter+1;
+  if (counter >=61)
+  {
+  clearTimeout(timerId);
+  $("#footerMsg").html("Sync time out - Check your internet connection and try again");
+  }
+ 
+}
+
+function stopSync()
+{
+
+clearTimeout(timerId);
+
+ $("#footerMsg").html("There are " +  OfflineRecords + " offline forms." + extraMsg + ".<br> Attempt:" + counter + " of 60 <br> <h2>Sync Stopped</h2>" );
+}
+
+</script>
+
+</div>
+						
+					
+					
+			

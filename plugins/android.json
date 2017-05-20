@@ -1,0 +1,37 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "batleaf.app.com"
+        }
+    }
+}

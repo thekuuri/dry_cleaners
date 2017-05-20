@@ -1,0 +1,173 @@
+<div class="form-style-10">
+<h1>Bassal Application and Transplanting</h1>
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+
+<div class="section"></div>
+<div class="inner-wrap">
+<input type="hidden" name="CAPTURER" id="CAPTURER" placeholder="Enter your Name" readonly/>
+	    <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to reload" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+      <label>Barcode <input type="text" name="BARCODE" id="barcode" name="barcode" placeholder="Click to reload" readonly /></label>			
+ <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+ <input  type="hidden"   name="GROWER_NO">
+        <label>Land are planted (Ha)<input  type="number" min="0"  name="LAND_AREA"></label>
+             <label>Did the farmer practise crop rotation<select name="PRACTISE_CROP_ROTATION">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  
+	     <label>Have you confirmed that the rotations does not involve crops of the same family
+		 <select name="NOT_INVOLVE_CROPS_OF_THE_SAME">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  <label>What Crops were they<input type="text" name="CROPS" /></label>
+	  <label>Did the farmer destroy seedbeds
+		 <select name="DID_THE_FARMER_DESTROY_SEEDBEDS">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  <label>Is there a barn under construction
+		 <select name="BARN_UNDER_CONSTRUCTION">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	
+   <label>Status of barn under construction
+		 <select name="STATUS_OF_BARN_UNDER_CONSTRUCTION">
+	     <option value="New_Barn">New Barn</option>
+		 <option value="Barn_Under_Repair">Barn Under Repair</option>
+	  </select> </label>
+		
+	
+	<label>Did the farmer receive recommended fert
+		 <select name="RECOMMENDED_FERTILIZER">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+		
+    <label>Number of bags (50Kgs) applied<input  type="number" min="0"  name="NUMBER_OF_BAGS"></label>
+    <label>Date of Application<input  type="date"  name="DATE_OF_APPLICATION"></label>
+
+	<label> Was insecticide applied ?<br>
+	     <input type="radio" name="WAS_INSECTICIDE_APPLIED" value="YES" onclick="showClass('insecticideApplied')">Yes</option>
+	     <input type="radio" name="WAS_INSECTICIDE_APPLIED" value="NO" onclick="hideClass('insecticideApplied')">NO</option>
+	  </select> </label>	
+	  
+	  <label class="insecticideApplied"> What type of insecticide was applied<br>
+		 <input name="INSECTICIDE_CONFIDOR" type="checkbox" value="1">Confidor</br>
+		 <input name="INSECTICIDE_ACTARA" type="checkbox" value="1">Actara</br>
+		 <input name="INSECTICIDE_OTHENI" type="checkbox" value="1">Otheni</br>
+	  </select> </label>
+			
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+  
+     function hideClass(className)
+{
+$("." + className).hide();
+}
+
+function showClass(className)
+{
+$("." + className).show();
+}
+
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+	hideClass('insecticideApplied');
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "basal_application__transplantingv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>

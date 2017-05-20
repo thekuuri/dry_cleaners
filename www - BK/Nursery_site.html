@@ -1,0 +1,219 @@
+<div class="form-style-10">
+<h1>Nursery Site</h1>
+<form id="nurserySite" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<div class="section"></div>
+<div class="inner-wrap">
+<label>User<input type="text" name="CAPTURER"  placeholder="Enter your Name" /></label>
+	     <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to reload" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+	  
+    <label>What is the site activity
+		   <select name="WHAT_IS_THE_SITE_ACTIVITY"> 
+		   <option value="Site_Establishment">Site Establishment</option>
+		   <option value="Resetting_Activity_Sowing ">Resetting Activity Sowing</option>
+		   <option value="Clipping">Clipping</option>
+		   </select>
+		   </label> 
+ <label>
+ <fieldset><legend>No of beds on site</legend>
+	<label>Number of - Raised<input type="text" name="BEDS_NUMBER_OF_RAISED" /></label>  
+ 	<label>Number of - Sown<input type="text" name="BEDS_NUMBER_OF_TARGET" /></label>  
+	<label>Number of - Reset<input type="text" name="" /></label>  
+  </fieldset>
+  </label>
+  <label>Average Size of beds in sq mts<input type="text" name="AVERAGE_SIZE_OF_BEDS_IN_SQ_MTS" /></label> 
+   <label>Standard Criteria for site met?
+     <select name="STANDARD_CRITERIA_FOR_SITE_MET"> 
+		   <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+    </label> 
+ 
+   <label>Source of water for site<br>
+ 	  	 <input name="SOURCE_OF_WATER_FOR_SITE_DAM" type="checkbox" value="1" />Dam</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_RIVER" type="checkbox" value="1" />River</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_BOREHOLE" type="checkbox" value="1" />Borehole</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_WELL" type="checkbox" value="1" />Site Well</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_HARVESTED_RAIN_WATER" type="checkbox" value="1" />Rain Water</br>
+		 <input name="SOURCE_OF_WATER_FOR_SITE_PIPED_WATER" type="checkbox" value="1" />Piped Water</br>
+    </label> 
+	<br>
+	<label>Distance of site from water source in metres<input type="number" name="DISTANCE_OF_SITE_FROM_WATER_SOURCE" /></label>  
+	<label>
+	 <fieldset><legend>Seed Variety No.</legend>
+		      <table border=0 class="seedType">  
+	  <tr>
+	     <td><input name="SEED_VARIETY_NO_RGH04" type="checkbox" value="1" />RGH04</td>
+		 <td><input name="SEED_VARIETY_NO_PVH50" type="checkbox" value="1" />PVH50</td>
+		 <td><input name="SEED_VARIETY_NO_PVH09" type="checkbox" value="1" />PVH09</td>
+		 <td><input name="SEED_VARIETY_NO_PV19" type="checkbox" value="1" />PV19</td>
+	  </tr>
+	  <tr>
+		 <td><input name="SEED_VARIETY_NO_K326PVY" type="checkbox" value="1" />K326PVY</td>
+		 <td><input name="SEED_VARIETY_NO_CSC402" type="checkbox" value="1" />CSC402</td>
+		 <td><input name="SEED_VARIETY_NO_CSC404" type="checkbox" value="1" />CSC404</td>
+		 <td><input name="SEED_VARIETY_NO_CSC463" type="checkbox" value="1" />CSC463</td>
+	</tr><tr>
+		 <td><input name="SEED_VARIETY_NO_CSC444" type="checkbox" value="1" />CSC444</td>
+		 <td><input name="SEED_VARIETY_NO_K326" type="checkbox" value="1" />K326</td>
+		 <td><input name="SEED_VARIETY_NO_SNRA" type="checkbox" value="1" />SNRA</td>
+		 <td><input name="SEED_VARIETY_NO_CSC497" type="checkbox" value="1" />CSC497</td>
+	</tr><tr>
+		 <td><input name="SEED_VARIETY_NO_LK101" type="checkbox" value="1" />LK101</td>
+		 <td><input name="SEED_VARIETY_NO_HW" type="checkbox" value="1" />HW</td>
+		 <td><input name="SEED_VARIETY_NO_SG28" type="checkbox" value="1" />SG28</td>
+		 <td><input name="SEED_VARIETY_NO_LK26R" type="checkbox" value="1" />LK26R</td>
+	</tr>
+		 </table>
+	 </label> 
+</fieldset>
+	
+   <label>Chemical Application<br>
+ 	  	 <input name="CHEMICAL_APPLICATION_FIRST" type="checkbox" value="1" />First</br>
+		 <input name="CHEMICAL_APPLICATION_SECOND" type="checkbox" value="1" />Second</br>
+		 <input name="CHEMICAL_APPLICATION_THIRD" type="checkbox" value="1" />Third</br>
+ </label> 
+	     <label>Chemical Type
+		   <select name="CHEMICAL_TYPE"> 
+		   <option value="Dithane">Dithane</option>
+		   <option value="Orthene">Orthene</option>
+		   <option value="Actara">Actara</option>
+		   <option value="Confidor">Confidor</option>
+		   <option value="Copper">Copper</option>
+		   </select>
+		   </label> 
+<label>	Date of application of Imidachloprid<input type="date" name="DATE_OF_APPLICATION_OF_IMIDACHLOPRID" /></label>  
+<label>First Sowing Date<input type="date" name="FIRST_SOWING_DATE" /></label>  
+  
+   <label>Clippings done?
+     <select name="BEDS_DONE_CLIPPLING_CLIPPED"> 
+		   <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+    </label>
+   <label>Number of clipping   <input type="number" name="NUMBER_OF_CLIPPINGS" />   </label>
+     <label>Cleanliness
+     <select name="SITE_CLEANLINESS"> 
+		   <option value="Excellent">Excellent</option>
+		   <option value="Good">Good</option>
+		   <option value="Fair">Fair</option>
+		   <option value="Poor">Poor</option>
+	   </select>
+    </label>
+   
+    <label>Is the site fenced?
+     <select name="IS_THE_SITE_FENCED"> 
+		   <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+    </label>
+   
+     <label>Place for washing hands?
+     <select name="IS_THERE_A_PLACE_FOR_WASHING_HANDS"> 
+		   <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+    </label>
+      <label>Does it have a foot bath?
+     <select name="DOES_IT_HAVE_A_FOOT_BATH"> 
+		   <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+    </label>
+   
+ <label>Type of labour<br>
+ 	  	 <input name="TYPE_OF_LABOUR_CHILD" type="checkbox" value="1" />Child</br>
+		 <input name="TYPE_OF_LABOUR_FAMILY" type="checkbox" value="1" />Family</br>
+		 <input name="TYPE_OF_LABOUR_PAID" type="checkbox" value="1" />Paid</br>
+ </label> 
+   
+
+ <label>If the labour is paid, how were they paid?<br>
+   <select name="IF_THE_LABOUR_IS_PAID_HOW_WERE_THEY_PAID"> 
+		   <option value="Cash">Cash</option>
+		   <option value="Food">Food</option>
+		   <option value="Credit">Credit</option>
+	  </select>
+ </label> 
+   
+
+<label>No of people involved <input type="number" name="NUMBER_OF_PEOPLE_INVOLVED" /></label>  
+<label>No of days worked<input type="number" name="NUMBER_OF_DAYS_WORKED" /></label>  
+
+ <label>Are the seedlings of good quality ?<br>
+   <select name="ARE_THE_SEEDLINGS_OF_GOOD_QUALITY"> 
+		 <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+ </label>
+ 
+  <label>Did all the farmers receive BAT issued inputs<br>
+   <select name="DID_ALL_THE_FARMERS_RECEIVE_BAT_ISSUED_INPUTS"> 
+		 <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+ </label>
+
+ <label>Reason for non receipt of BAT issued inputs<input type="text" name="REASON_FOR_NON_RECEIPT_OF_BAT_ISSUED_INPUTS" /></label>  
+
+ 
+   <label>Score the Seedbed activity<br>
+   <select name="SCORE_SEEDBED_ACTIVITY"> 
+		   <option value="YES">Poor</option>
+		   <option value="Fair">Fair</option>
+		   <option value="Good">Good</option>
+		   <option value="NO">Excellent</option>
+	  </select>
+ </label>
+   <label> Disposal of chemical packages<br>
+   <select name="DISPOSAL_OF_CHEMICAL_PACKAGES"> 
+		   <option value="Bury">Bury</option>
+		   <option value="Burning">Burning</option>
+		   <option value="Return_to_BAT">Return to BAT</option>
+	  </select>
+ </label>
+  
+
+
+ 
+ 
+  <div class="button-section">
+     <input type="button" value="Upload data1.."  id="UploadBtn">
+    </div>
+    </div>
+
+
+<script>
+
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+
+	$(document).ready(function() {
+	$("#UploadBtn").click(function(){
+	alert("clicked");
+	 sqlTable = "nursery_sitev1";
+     $.post(serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable ,$("#nurserySite").serialize(),function(data)
+   {
+   //alert(data)
+     showInfo("info",data,"Upload Complete");
+	 document.getElementById("nurserySite").reset();
+   });
+   
+	});
+
+});
+function CashCropView(vs){
+document.getElementById("CashLegend").style.visibility=vs;
+}
+
+
+</script>
+
+	
+</form>
+</div>
+	

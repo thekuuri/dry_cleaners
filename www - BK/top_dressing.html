@@ -1,0 +1,92 @@
+<div class="form-style-10">
+<h1>Top-dressing and Plant Count</h1>
+<form id="dressing" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<div class="section"></div>
+<div class="inner-wrap">
+ <label>What top dress was applied<select name="PRACTISE_CROP_ROTATION">
+	     <option value="CAN">CAN</option>
+		 <option value="KNO3">KNO3</option>
+	  </select> </label>
+	  
+
+	     <label>Have you confirmed that the rotations does not involve crops of the same family
+		 <select name="NOT_INVOLVE_CROPS_OF_THE_SAME">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  <label>What Crops were they<input type="text" name="CROPS" /></label>
+	  <label>Did the farmer destroy seedbeds
+		 <select name="DID_THE_FARMER_DESTROY_SEEDBEDS">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	  <label>Is there a barn under construction
+		 <select name="BARN_UNDER_CONSTRUCTION">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+	
+   <label>Status of barn under construction
+		 <select name="STATUS_OF_BARN_UNDER_CONSTRUCTION">
+	     <option value="New_Barn">New Barn</option>
+		 <option value="Barn_Under_Repair">Barn Under Repair</option>
+	  </select> </label>
+		
+	
+	<label>Did the farmer receive recommended fert
+		 <select name="RECOMMENDED_FERTILIZER">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>
+		
+    <label>Number of bags (50Kgs) applied<input  type="number" min="0"  name="NUMBER_OF_BAGS"></label>
+    <label>Date of Application<input  type="date"  name="DATE_OF_APPLICATION"></label>
+
+	<label> Was insecticide applied
+		 <select name="WAS_INSECTICIDE_APPLIED">
+	     <option value="YES">Yes</option>
+		 <option value="NO">No</option>
+	  </select> </label>	
+	  
+	  <label> What type of insecticide was applied
+		 <input name="INSECTICIDE_CONFIDOR" type="checkbox" value="1">Confidor</br>
+		 <input name="INSECTICIDE_ACTARA" type="checkbox" value="1">Actara</br>
+		 <input name="INSECTICIDE_OTHENI" type="checkbox" value="1">Otheni</br>
+	  </select> </label>
+			
+<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+
+	$(document).ready(function() {
+	//alert("Done");
+	$("#UploadBtn").click(function(){
+	 sqlTable = "basal_application__transplantingv1";
+     $.post("http://localhost/GisFiles/www/saveAll.php?sqlTable="+ sqlTable ,$("#basal").serialize(),function(data)
+   {
+   alert(data)
+     showInfo("info",data,"Upload Complete");
+	 document.getElementById("basal").reset();
+   });
+   
+	});
+
+});
+function CashCropView(vs){
+document.getElementById("CashLegend").style.visibility=vs;
+}
+</script>
+
+	
+</form>
+</div>
+						
+					
+					
+			

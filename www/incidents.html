@@ -1,0 +1,177 @@
+<div class="form-style-10">
+<h1>Log a new incident</h1>
+<form id="farmerInfo" method="POST">
+<script src="js/jquery.min.js"></script>
+<!-- <script src="../assets/js/sqlLite.js"></script> -->
+<link rel="stylesheet" href="../assets/css/main.css">
+
+
+
+<div class="section"></div>
+<div class="innerx-wrap">
+<form name="" id="incidentForm">
+<label>User<input type="text" name="userID"  id="CAPTURER"  placeholder="" readonly /></label>
+
+  <label>Category<select name="category">
+		<option value="Security">Security</option>
+		<option value="Water">Water</option>
+		<option value="SewerAndDrainage">Sewer and Drainage</option>
+		<option value="Power">Power</option>
+		<option value="Internet">Internet</option>
+		<option value="Environmental">Environmental and Hygiene</option>
+		<option value="RoadAndTraffic">Road And Traffic</option>
+		<option value="Other">Other</option>
+	  </select></label>
+		
+		
+  <label>Severity<select name="Severity">
+		<option value="Minor">Minor</option>
+		<option value="Average">Average</option>
+		<option value="VerySever">Very Sever</option>
+	  </select></label>		
+		
+		  <label>Brief description:<input  type="text" name="description" /></label>
+  
+		
+ 
+         <label>Take Photos:<br>
+		 <input type="button" value="Take Photo - 1" class="icon fa-camera" onclick="CaptureImage_base64('imageAttachment_1');">
+		  <input type="text" name="imageAttachment_1" id="imageAttachment_1">
+		 <input type="button" value="Take Photo - 2" class="icon fa-camera" onclick="CaptureImage_base64('imageAttachment_2');">
+		  <input type="text" name="imageAttachment_2" id="imageAttachment_2"><br>
+		  ~optional:attachment<input type="file" name="attachment">
+		 </label>   
+  
+  <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to load" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+  
+        <label>Location:
+		<select name="location">
+		<option value="---">please select</option>
+		<option value="GPS">Pick my current GPS</option>
+		<option value="TypeName">Type Location</option>
+	    </select>
+		</label>
+</form>
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Create Incident"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+photoReturnID ="";
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	//sqlLiteinit();
+	 
+	 currentUserID="Richard"; //window.localStorage.getItem("currentUserID");
+	 sqlTable = "incidents_table";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	 
+	 
+	  $.post(urlPost,$("#incidentForm").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					/// clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					 // $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("incidentForm").reset();
+					
+			   });
+	 
+	 		 showInfo("info",data,"Thank you, your Incident has been created");
+			 
+			 
+	 	 
+		 /*
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+			   
+	    }
+		*/	
+   });
+
+ 
+});
+
+function CaptureImage_base64(returnID)
+			{
+			
+			 alert("Camera Call initiated NEW - base64");
+			/*
+		   imageQuality=prompt("Image Quality -64",10);
+		   */
+		   photoReturnID=returnID;
+		    imageQuality=20;
+			navigator.camera.getPicture(onSuccessBS64, onFail, { quality: imageQuality,destinationType: Camera.DestinationType.DATA_URL });
+			}
+			
+				function onSuccessBS64(imageData)
+				{
+			      //alert("photoReturnID:" + photoReturnID);
+					 var imageString_Holder = document.getElementById(photoReturnID);
+					 imageString_Holder.value = "data:image/jpeg;base64," + imageData;
+				   /*  alert("Size is:");
+					 alert(imageData.length); */
+				}
+				
+			
+			   function onFail(message) {
+			 		alert('Failed because: ' + message);
+			   }
+		 
+
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>

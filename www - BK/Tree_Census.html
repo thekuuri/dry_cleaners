@@ -1,0 +1,128 @@
+<div class="form-style-10">
+<h1>Tree Census</h1>
+<form id="farmerInfo" method="POST">
+
+
+<div class="section"></div>
+<div class="innerx-wrap">
+<input type="hidden" name="CAPTURER"  id="CAPTURER"  placeholder="Enter your Name" readonly />
+<label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to load" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+<label>Barcode <input type="text" name="BARCODE" id="barcode" name="barcode" placeholder="Click to reload" readonly /></label>			
+ <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+		
+        <label>Does the farmer have trees on the land holdings <select name="TREES_ON_THE_LAND_HOLDINGS">
+		<option value="YES">YES</option>
+		<option value="NO">NO</option>
+	</select>
+		</label>
+		
+        <label>Number of mature trees Clone<input  type="number" min="0"  name="MATURE_CLONE_TREES"></label>
+        <label>Number of mature trees Exotic<input  type="number" min="0"  name="MATURE_EXOTIC_TREES"></label>
+        <label>Number of mature trees Indiginous<input  type="number" min="0"  name="MATURE_INDEGENEOUS_TREES"></label>
+		<br>
+	 <label>Number of developing trees Clone<input  type="number" min="0"  name="DEVELOPING_CLONE_TREES"></label>
+        <label>Number of developing trees Exotic<input  type="number" min="0"  name="DEVELOPING_EXOTIC_TREES"></label>
+        <label>Number of developing trees Indiginous<input  type="number" min="0"  name="MATURE_INDEGENEOUS_TREES"></label>
+		
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "tree_censusv1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+<script src="js/Coordinates.Area.Measure.js"></script>

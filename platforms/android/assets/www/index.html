@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Umoja Page Load</title>
+	<!--iOS -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="assets/eliud/css/loader-normalize.css">
+	<link rel="stylesheet" href="assets/eliud/css/loader-main.css">
+
+	<script src="assets/eliud/js/loader-modernizr-2.6.2.min.js"></script>
+	<style type="text/css">
+	.back-link a {
+		color: #4ca340;
+		text-decoration: none; 
+		border-bottom: 1px #4ca340 solid;
+	}
+	.back-link a:hover,
+	.back-link a:focus {
+		color: #408536; 
+		text-decoration: none;
+		border-bottom: 1px #408536 solid;
+	}
+	h1 {
+		height: 100%;
+		/* The html and body elements cannot have any padding or margin. */
+		margin: 0;
+		font-size: 14px;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 32px;
+		margin-bottom: 3px;
+	}
+	.entry-header {
+		text-align: left;
+		margin: 0 auto 50px auto;
+		width: 100%;
+        max-width: 978px;
+		position: relative;
+		z-index: 10001;
+	}
+	#UmojaLoader-content {
+		padding-top: 100px;
+	}
+	</style>
+</head>
+<body class="UmojaLoader">
+	
+	<div id="UmojaLoader-content">  
+	<div id='headertxt'>&reg; Umoja Paap!</div>
+		<div id="loader-wrapper">
+		
+			<div id="loader">
+			<span id="loader-line-blue"></span>
+			<img src='assets/eliud/images/pic3.png' id='lolo'>
+			</div>
+
+		</div>
+		<div id='lowertext'>
+		Great Communication
+		<br>Great Living
+		<br>
+		<br>
+			<span>
+&reg; Umoja Paap!
+</span>
+		</div>
+ 
+	</div>	   
+	<script src="assets/eliud/js/loader-jquery-1.9.1.min.js"></script>
+	<script src="assets/eliud/js/loader-main.js"></script>
+
+
+</body>
+<script>
+setTimeout(function(){ location.href="splash.html"; }, 5000);
+</script>
+
+
+
+</html>

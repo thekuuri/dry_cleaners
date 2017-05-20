@@ -1,0 +1,230 @@
+<div class="form-style-10">
+<h1>Sowing Activity</h1>
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+
+<div class="section"></div>
+<div class="inner-wrap">
+<input type="hidden" name="CAPTURER"  id="CAPTURER" placeholder="Enter your Name" />
+	     <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to reload" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+	  
+    <label>What is the site activity
+		   <input type="text" name="WHAT_IS_THE_SITE_ACTIVITY" value="Resetting_Activity_Sowing" readonly>
+	  </label> 
+ <label>
+ <fieldset><legend><h3>No of beds on site</h3></legend>
+	<label>Raised<input type="number" name="BEDS_NUMBER_OF_RAISED" /></label>  
+ 	<label>Sown<input type="number" name="BEDS_NUMBER_OF_TARGET" /></label>  
+	<label>Reset<input type="number" name="" /></label>  
+  </fieldset>
+  </label>
+	
+	  <label>
+	 <fieldset><legend>Seed Variety No.</legend>
+	
+		      <table border=1 class="seedType">  
+	  <tr>
+	     <td><input name="SEED_VARIETY_NO_RGH04" type="checkbox" value="1" />RGH04</td>
+		 <td><input name="SEED_VARIETY_NO_PVH50" type="checkbox" value="1" />PVH50</td>
+		 <td><input name="SEED_VARIETY_NO_PVH09" type="checkbox" value="1" />PVH09</td>
+		 <td><input name="SEED_VARIETY_NO_PV19" type="checkbox" value="1" />PV19</td>
+	  </tr>
+	  <tr>
+		 <td><input name="SEED_VARIETY_NO_K326PVY" type="checkbox" value="1" />K326PVY</td>
+		 <td><input name="SEED_VARIETY_NO_CSC402" type="checkbox" value="1" />CSC402</td>
+		 <td><input name="SEED_VARIETY_NO_CSC404" type="checkbox" value="1" />CSC404</td>
+		 <td><input name="SEED_VARIETY_NO_CSC463" type="checkbox" value="1" />CSC463</td>
+	</tr><tr>
+		 <td><input name="SEED_VARIETY_NO_CSC444" type="checkbox" value="1" />CSC444</td>
+		 <td><input name="SEED_VARIETY_NO_K326" type="checkbox" value="1" />K326</td>
+		 <td><input name="SEED_VARIETY_NO_SNRA" type="checkbox" value="1" />SNRA</td>
+		 <td><input name="SEED_VARIETY_NO_CSC497" type="checkbox" value="1" />CSC497</td>
+	</tr><tr>
+		 <td><input name="SEED_VARIETY_NO_LK101" type="checkbox" value="1" />LK101</td>
+		 <td><input name="SEED_VARIETY_NO_HW" type="checkbox" value="1" />HW</td>
+		 <td><input name="SEED_VARIETY_NO_SG28" type="checkbox" value="1" />SG28</td>
+		 <td><input name="SEED_VARIETY_NO_LK26R" type="checkbox" value="1" />LK26R</td>
+	</tr>
+		 </table>
+	 </label> 
+</fieldset>
+	
+	     <label>Seed source
+		   <select name="SEED_SOURCE"> 
+		   <option value="BAT">BAT</option>
+		   <option value="3rdParty">3rd Party</option>
+		   </select>
+		   </label> 
+	
+   <label>Chemical Application<br>
+ 	  	 <input name="CHEMICAL_APPLICATION_FIRST" type="checkbox" value="1" />First</br>
+		 <input name="CHEMICAL_APPLICATION_SECOND" type="checkbox" value="1" />Second</br>
+		 <input name="CHEMICAL_APPLICATION_THIRD" type="checkbox" value="1" />Third</br>
+ </label> 
+	     <label>Chemical Type
+		   <select name="CHEMICAL_TYPE"> 
+		   <option value="Dithane">Dithane</option>
+		   <option value="Orthene">Orthene</option>
+		   <option value="Actara">Actara</option>
+		   <option value="Confidor">Confidor</option>
+		   <option value="Copper">Copper</option>
+		   </select>
+		   </label> 
+<label>	Date of application of Imidachloprid<input type="date" name="DATE_OF_APPLICATION_OF_IMIDACHLOPRID" /></label>  
+<label>First Sowing Date<input type="date" name="FIRST_SOWING_DATE" /></label>  
+   
+ <label>Type of labour<br>
+ 	  	 <input name="TYPE_OF_LABOUR_CHILD" type="checkbox" value="1" />Child</br>
+		 <input name="TYPE_OF_LABOUR_FAMILY" type="checkbox" value="1" />Family</br>
+		 <input name="TYPE_OF_LABOUR_PAID" type="checkbox" value="1" />Paid</br>
+ </label> 
+   
+
+ <label>If the labour is paid, how were they paid?<br>
+   <select name="IF_THE_LABOUR_IS_PAID_HOW_WERE_THEY_PAID"> 
+		   <option value="Cash">Cash</option>
+		   <option value="Food">Food</option>
+		   <option value="Credit">Credit</option>
+	  </select>
+ </label> 
+   
+
+<label>No of people involved <input type="number" name="NUMBER_OF_PEOPLE_INVOLVED" /></label>  
+<label>No of days worked<input type="number" name="NUMBER_OF_DAYS_WORKED" /></label>  
+
+ <label>Are the seedlings of good quality ?<br>
+   <select name="ARE_THE_SEEDLINGS_OF_GOOD_QUALITY"> 
+		 <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+ </label>
+ 
+  <label>Did all the farmers receive BAT issued inputs<br>
+   <select name="DID_ALL_THE_FARMERS_RECEIVE_BAT_ISSUED_INPUTS"> 
+		 <option value="YES">Yes</option>
+		   <option value="NO">No</option>
+	  </select>
+ </label>
+
+ <label>Reason for non receipt of BAT issued inputs<input type="text" name="REASON_FOR_NON_RECEIPT_OF_BAT_ISSUED_INPUTS" /></label>  
+
+ 
+   <label>Score the Seedbed activity<br>
+   <select name="SCORE_SEEDBED_ACTIVITY"> 
+		   <option value="YES">Poor</option>
+		   <option value="Fair">Fair</option>
+		   <option value="Good">Good</option>
+		   <option value="NO">Excellent</option>
+	  </select>
+ </label>
+   <label> Disposal of chemical packages<br>
+   <select name="DISPOSAL_OF_CHEMICAL_PACKAGES"> 
+		   <option value="Bury">Bury</option>
+		   <option value="Burning">Burning</option>
+		   <option value="Return_to_BAT">Return to BAT</option>
+	  </select>
+ </label>
+  
+
+
+	
+<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+
+document.getElementById("gps").addEventListener("click", getPosition);
+
+ $(document).ready(function() {
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "nursery_sitev1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>
+						
+					
+					
+			

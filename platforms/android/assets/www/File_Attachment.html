@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery File Upload Demo</title>
+<link href="script/uploadfile.css" rel="stylesheet">
+<script src="assets/js/jquery.min.js"></script>
+<script src="script/jquery.uploadfile.min.js"></script></head>
+</head>
+<body>
+File Description:<br><input type=text name="fileDescription" id="description" />
+<div id="fileuploader">Upload</div>
+
+</body>
+<script>
+$(document).ready(function()
+{
+   $("#fileuploader").uploadFile({
+  	url:serverAddress + "GISFiles/fileSave.php?",
+	description:"descriptionOPO",
+	fileName:"file1" });
+});
+</script>
+
+</html>

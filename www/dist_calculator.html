@@ -1,0 +1,79 @@
+<div class="form-style-10">
+<h1>Distance Calculation</h1>
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+<script src="js/Coordinates.Area.Measure.js"></script>
+
+
+<div class="section"></div>
+
+<div class="innerx-wrap">
+
+<style>
+
+.gpsButton{ background-color:#00ff00; color:#ff0000;}
+.resetButton{color:#ff0000;}
+
+</style>
+<script>
+var pointFetcher;
+
+
+function startPointFetching()
+{
+//Fetch Point every 3 seconds.
+pointFetcher = setInterval(fetchPoint_calculateArea, 3000);
+//alert("Timer Set");
+return 0;
+}
+
+function resetCount()
+{
+if (confirm("Are you sure you want to clear the distance coordinates ?")==true)
+	{
+stopPointFetch();
+resetArea();
+}
+return 0;
+}
+
+function fetchPoint_calculateArea()
+{
+fetchPoint();
+getArea();
+
+return 0;
+}
+
+function stopPointFetch()
+{
+alert("Timer Stopped");
+clearInterval(pointFetcher);
+getArea();
+
+return 0;
+}
+
+</script>
+
+   <!--------- area measure html--------->
+	<div class="button-section">
+	<br>
+	 <input type="button" id="startTimer" class="gpsButton"  value="Start land measure" onclick="startPointFetching();" />
+	 <br>
+     <input type="button" value="Stop measure" id="stopTimer"  onclick="stopPointFetch();">
+     <input type="hidden" value="Calculate Area"  onclick="getArea();">
+	 <br>
+     <input type="button" value="Reset"  onclick="resetArea();">
+    </div>
+	<label> <h4>Your area is ~: <b><span id="areaHolder"></span></b></h4></label>
+	 <input type="hidden" name="LAND_GPS_POLYGON" id="LAND_GPS_POLYGON" /></label>
+	</label>
+  <!--------- end of area measure  ------------>
+		
+</form>
+<span id="footerMsg"></span>
+</div>

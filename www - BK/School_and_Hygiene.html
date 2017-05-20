@@ -1,0 +1,178 @@
+<div class="form-style-10">
+<h1>School and Hygiene</h1>
+
+
+<form id="farmerInfo" method="POST">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/cookie.js"></script>
+<script src="assets/js/Settings.js"></script>
+<script src="sqlLite.js"></script>
+
+
+<div class="section"></div>
+<div class="inner-wrap">
+<input type="hidden" name="CAPTURER" id="CAPTURER" placeholder="Enter your Name" readonly/>
+	    <label>GPS Location<input type="text" name=""  id="gps"  placeholder="Click to reload" readonly/>
+		<input type="hidden" id="LAT" name="CONFIRM_GPS_LOCATION_LATITUDE">
+		<input type="hidden" id="LON" name="CONFIRM_GPS_LOCATION_LONGITUDE">
+		<input type="hidden" id="ALT" name="CONFIRM_GPS_LOCATION_ALTITUDE">
+		</label>
+      <label>Barcode <input type="text" name="BARCODE" id="barcode" name="barcode" placeholder="Click to reload" readonly /></label>			
+     <label>Farmer Name:<span id="BARCODE_RETURN"></span></label>
+ 
+ 
+ 
+         <label>Any dependants under the Age of 18 not attending school?<br>
+		 <input type="radio" name="DEPENDANTS_NOT_ATTENDING_SCHOOL" value="YES" onclick="showClass('reasonWorkingonFarm')">Yes</option>
+	     <input type="radio" name="DEPENDANTS_NOT_ATTENDING_SCHOOL" value="NO" onclick="hideClass('reasonWorkingonFarm')">NO</option>
+	 	 
+	    </label> 
+		<label class="reasonWorkingonFarm">Reason for dependants not attending school<select name="REASON">
+	     <option value="NONE">None</option>
+	     <option value="Working_on_the_farm">Working on the farm</option>
+	     <option value="Lack_of_finance_for_school_fees">Lack of finance for school fees</option>
+	     <option value="Not_interested">Not interested</option>
+		 <option value="Not_allowed_to_attend">Not allowed to attend</option>
+		 <option value="Did_not_qualify_to_next_education_level">Did not qualify to next education level</option>
+           </select>
+	    </label>
+	  	  <label>
+	    <fieldset id="CashLegend" class="reasonWorkingonFarm"><legend>What activities are the  dependants under 18 doing on the farm  </legend>
+		 <input name="ACTIVITIES_DEPENDANTS_SEEDBEDS" type="checkbox" value="1">Seedbeds</br>
+		 <input name="ACTIVITIES_DEPENDANTS_LAND_PREP" type="checkbox" value="1">Land Prep</br>
+		 <input name="ACTIVITIES_DEPENDANTS_PLANTING" type="checkbox" value="1">Planting</br>
+		 <input name="ACTIVITIES_DEPENDANTS_APPLICATION_OF_FERTILISER" type="checkbox" value="1">Applic of fertiliser</br>
+		 <input name="ACTIVITIES_DEPENDANTS_APPLICATION_OF_CHEMICALS" type="checkbox" value="1">Application of Chemicals</br>
+		 <input name="ACTIVITIES_DEPENDANTS_WEEDING" type="checkbox" value="1">Weeding</br>
+		 <input name="ACTIVITIES_DEPENDANTS_TOPPING" type="checkbox" value="1">Topping</br>
+		 <input name="ACTIVITIES_DEPENDANTS_REAPING" type="checkbox" value="1">Reaping</br>
+		 <input name="ACTIVITIES_DEPENDANTS_TRANSPORT_TO_BARN" type="checkbox" value="1">Transport to barn</br>
+		 <input name="ACTIVITIES_DEPENDANTS_TYING_TOBACCO" type="checkbox" value="1">Tying tobacco</br>
+		 <input name="ACTIVITIES_DEPENDANTS_HANGING_TOBACCO" type="checkbox" value="1">Hanging Tobacco</br>
+		 <input name="ACTIVITIES_DEPENDANTS_CURING" type="checkbox" value="1">Curing</br>
+		 <input name="ACTIVITIES_DEPENDANTS_OFFLOADING_TOBACCO" type="checkbox" value="1">Off loading tobacco</br>
+		 <input name="ACTIVITIES_DEPENDANTS_GRADING" type="checkbox" value="1">Grading</br>
+		 <input name="ACTIVITIES_DEPENDANTS_BALING" type="checkbox" value="1">Baling</br>
+		 <input name="ACTIVITIES_DEPENDANTS_TRANSPORT_OF_BALES" type="checkbox" value="1">Transport of bales</br>
+		 <input name="ACTIVITIES_DEPENDANTS_OTHER" type="checkbox" value="1">Others</br>
+	 </fieldset>
+	  </label>
+	  
+	  	  <label>
+	    <fieldset id="CashLegend"><legend>What is the farmers main source of drinking water </legend>
+		 <input name="MAIN_SOURCE_WATER_RIVER" type="checkbox" value="1">River</br>
+		 <input name="MAIN_SOURCE_WATER_DAM" type="checkbox" value="1">Dam</br>
+		 <input name="MAIN_SOURCE_WATER_HARVESTED_RAIN_WATER" type="checkbox" value="1">Harvested Rain water</br>
+		 <input name="MAIN_SOURCE_WATER_PIPED_WATER" type="checkbox" value="1">Piped water</br>
+		 <input name="MAIN_SOURCE_WATER_BOREHOLE" type="checkbox" value="1">Borehole</br>
+		 <input name="MAIN_SOURCE_WATER_WELL" type="checkbox" value="1">Well</br>
+	 </fieldset>
+	  </label>
+	  
+	  <label>No of Pit latrines in homestead <input  type="number"  name="PIT_LATRINES"></label>
+
+	<!---------  --------  -->
+	<div class="button-section">
+     <input type="button" value="Upload data"  id="UploadBtn">
+    </div>
+    </div>
+
+   <script>
+   
+     
+       function hideClass(className)
+{
+$("." + className).hide();
+}
+
+function showClass(className)
+{
+$("." + className).show();
+}
+
+  
+document.getElementById("gps").addEventListener("click", getPosition);
+document.getElementById("barcode").addEventListener("click", scan);
+document.getElementById("barcode").addEventListener("change", fetchName);
+
+
+ $(document).ready(function() {
+   hideClass('reasonWorkingonFarm');
+	
+	 //Initialize the sqlLite, DONOT forget to add the SqlLite.js file
+	 sqlLiteinit();
+	 
+	 currentUserID=window.localStorage.getItem("currentUserID");
+	 sqlTable = "school__hygienev1";
+	 var d =  new Date();
+	 //example synclogID ="EndOfSeasonAONDIEK2106497769843";
+	 synclogID= sqlTable + currentUserID + d.getTime();
+	 
+     urlPost =serverAddress + "/GisFiles/www/saveAll.php?sqlTable=" + sqlTable + "&sync_log='" + synclogID + "'";
+     
+	 
+	 
+	$("#CAPTURER").val(currentUserID);
+		
+	$("#UploadBtn").click(function(){
+	 
+	$("#farmerInfo").hide();
+	$("#footerMsg").html("uploadloading...");
+		 if (connectionStatus!="ONLINE")
+		 {			
+		 //alert("saving locally");
+			 saveToLocal();
+		}
+	   else
+	     {
+		   uploadTimeOut = setTimeout(saveToLocal, 5000); //if the server does not respond in 10 secs,Save to local
+			   $.post(urlPost,$("#farmerInfo").serialize(),function(data)
+			   {
+					//when the sever replies clear The uploadTimeOut Timer
+					 clearTimeout(uploadTimeOut);
+					 showInfo("info",data,"Upload Complete");
+					  $("#footerMsg").html("Upload Complete"); // !!always remember to add the footer span at the end of the form
+					 document.getElementById("farmerInfo").reset();
+					
+			   });
+		   
+				   
+	    }
+   });
+
+ 
+});
+
+
+		 function saveToLocal()
+		 {
+			 sqlLite.webdb.OfflineSync_Insert(synclogID,$("#farmerInfo").serialize(),urlPost);
+			 showInfo("warning","No internet,data saved localy","Local Sync");
+			 $("#footerMsg").html("WARNING; poor or no connection to server,data saved localy");  // !!always remember to add the footer span at the end of the form
+		 }
+
+function CashCropView(vs)
+ {
+    document.getElementById("CashLegend").style.visibility=vs;
+ 
+ }
+
+
+function fetchName()
+{
+//alert("ch");
+//alert("Code changed:" + $("#barcode").val());
+     $.get(serverAddress + "/GisFiles/www/nameFetch.php?barcode=" + $("#barcode").val(),function(data)
+   {
+   //alert(data)
+    $("#BARCODE_RETURN").html(data);
+   });
+   
+}
+
+</script>
+
+	
+</form>
+<span id="footerMsg"></span>
+</div>
